@@ -53,6 +53,17 @@ class ToDoTableViewController: UITableViewController {
         if let createVC = segue.destination as? CreateTodoViewController{
             createVC.toDoTableVC = self
         }
+        
+        if let completeVC = segue.destination as? CompleteViewController{
+            if let selectTodo = sender as? ToDo{
+                completeVC.todo = selectTodo
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedTodo = toDos[indexPath.row]
+        performSegue(withIdentifier: "moveToComplete", sender: selectedTodo)
     }
 
 }

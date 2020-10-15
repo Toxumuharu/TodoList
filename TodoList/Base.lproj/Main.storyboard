@@ -38,6 +38,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Ffn-xJ-jrL" kind="show" identifier="moveToComplete" id="28X-CU-9zU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnp-S1-4UP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,6 +123,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOK-Xl-JFN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-771" y="43"/>
+        </scene>
+        <!--Complete View Controller-->
+        <scene sceneID="miC-jR-heL">
+            <objects>
+                <viewController id="Ffn-xJ-jrL" customClass="CompleteViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gzr-LI-xCu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0g-w8-uA6">
+                                <rect key="frame" x="20" y="64" width="280" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AM6-L6-6W5">
+                                <rect key="frame" x="128" y="113" width="64" height="30"/>
+                                <state key="normal" title="complete"/>
+                                <connections>
+                                    <action selector="completeTapped:" destination="Ffn-xJ-jrL" eventType="touchUpInside" id="7eg-cs-3sK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9d6-Up-vUW" firstAttribute="trailing" secondItem="N0g-w8-uA6" secondAttribute="trailing" constant="20" id="2aE-9q-YaI"/>
+                            <constraint firstItem="AM6-L6-6W5" firstAttribute="centerX" secondItem="gzr-LI-xCu" secondAttribute="centerX" id="5r4-fX-TeV"/>
+                            <constraint firstItem="N0g-w8-uA6" firstAttribute="top" secondItem="9d6-Up-vUW" secondAttribute="top" constant="20" id="bez-jb-CyX"/>
+                            <constraint firstItem="N0g-w8-uA6" firstAttribute="leading" secondItem="9d6-Up-vUW" secondAttribute="leading" constant="20" id="t1i-aU-qGr"/>
+                            <constraint firstItem="AM6-L6-6W5" firstAttribute="top" secondItem="N0g-w8-uA6" secondAttribute="bottom" constant="20" id="wR5-4W-caN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9d6-Up-vUW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CzS-Ez-eCb"/>
+                    <connections>
+                        <outlet property="nameLabel" destination="N0g-w8-uA6" id="x8j-ja-GLj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mQm-1U-BRQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="146" y="-716"/>
         </scene>
     </scenes>
 </document>
