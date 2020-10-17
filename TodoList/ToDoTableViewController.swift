@@ -18,9 +18,10 @@ class ToDoTableViewController: UITableViewController {
     
     func getToDos(){
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
-            if let toDosFromCoreData = try? context.fetch(ToDoCoreData.fetchRequest()){
-                if let toDos = ToDoCoreData() as? [ToDoCoreData]{
-                    print(toDos)
+            if let toDosFromCoreData = try? context.fetch(ToDo.fetchRequest()){
+                if let toDos = toDosFromCoreData as? [ToDo]{
+                    self.toDos = toDos
+                    tableView.reloadData()
                 }
             }
         }
@@ -40,10 +41,14 @@ class ToDoTableViewController: UITableViewController {
         let currentToDo = toDos[indexPath.row]
         if currentToDo.important{
             // !
-            cell.textLabel?.text = "❗️" + currentToDo.name
+            if let name = currentToDo.name{
+                cell.textLabel?.text = "❗️" + name
+            }
         }else{
             // Normal
-            cell.textLabel?.text = "　" + currentToDo.name
+            if let name = currentToDo.name{
+                cell.textLabel?.text = name
+            }
         }
         
         return cell
@@ -56,7 +61,7 @@ class ToDoTableViewController: UITableViewController {
         
         if let completeVC = segue.destination as? CompleteViewController{
             if let selectTodo = sender as? ToDo{
-                completeVC.todo = selectTodo
+                completeVC.toDo = selectTodo
             }
         }
     }

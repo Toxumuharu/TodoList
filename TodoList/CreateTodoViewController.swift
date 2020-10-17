@@ -21,7 +21,7 @@ class CreateTodoViewController: UIViewController {
     
     @IBAction func addTapped(_ sender: Any) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
-            let newTodo = ToDoCoreData(context: context)
+            let newTodo = ToDo(context: context)
             if let name = nameTextField.text{
                 newTodo.name = name
             }
