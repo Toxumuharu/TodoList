@@ -9,34 +9,34 @@
 import UIKit
 
 class ToDoTableViewController: UITableViewController {
-
+    
     var toDos = [ToDo]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let toDo1 = ToDo()
-        toDo1.name = "Walk the dog"
-        toDo1.important = false
-
-        let toDo2 = ToDo()
-        toDo2.name = "Buy milk"
-        toDo2.important = true
-        
-        toDos = [toDo1, toDo2]
+    override func viewWillAppear(_ animated: Bool) {
+        getToDos()
     }
-
+    
+    func getToDos(){
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
+            if let toDosFromCoreData = try? context.fetch(ToDoCoreData.fetchRequest()){
+                if let toDos = ToDoCoreData() as? [ToDoCoreData]{
+                    print(toDos)
+                }
+            }
+        }
+    }
+    
     // MARK: - Table view data source
-
-
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDos.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
-            
+        
         let currentToDo = toDos[indexPath.row]
         if currentToDo.important{
             // !
@@ -45,7 +45,7 @@ class ToDoTableViewController: UITableViewController {
             // Normal
             cell.textLabel?.text = "　" + currentToDo.name
         }
-
+        
         return cell
     }
     
@@ -65,5 +65,5 @@ class ToDoTableViewController: UITableViewController {
         let selectedTodo = toDos[indexPath.row]
         performSegue(withIdentifier: "moveToComplete", sender: selectedTodo)
     }
-
+    
 }

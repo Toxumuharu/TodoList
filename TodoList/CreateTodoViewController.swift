@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateTodoViewController: UIViewController {
-
+    
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var importantSwitch: UISwitch!
@@ -20,16 +20,14 @@ class CreateTodoViewController: UIViewController {
     }
     
     @IBAction func addTapped(_ sender: Any) {
-        let newTodo = ToDo()
-        
-        if let name = nameTextField.text{
-            newTodo.name = name
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
+            let newTodo = ToDoCoreData(context: context)
+            if let name = nameTextField.text{
+                newTodo.name = name
+            }
+            newTodo.important = importantSwitch.isOn
+            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
         }
-        newTodo.important = importantSwitch.isOn
-        
-        toDoTableVC?.toDos.append(newTodo)
-        toDoTableVC?.tableView.reloadData()
-        
         navigationController?.popViewController(animated: true)
     }
     
